@@ -1,1 +1,72 @@
-//write your code here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryption & Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>File Encryption & Decryption</h2>
+    <input type="file" id="fileInput" />
+    <br>
+    <button onclick="encryptFile()">Encrypt File</button>
+    <button onclick="decryptFile()">Decrypt File</button>
+    <br>
+    <a id="downloadLink" style="display:none;" download>Download</a>
+    
+    <script type="module">
+        import { AES256 } from './aes.js';
+
+        let aes;
+        let encryptedData;
+        const key = crypto.getRandomValues(new Uint8Array(32)); // 256-bit key
+
+        async function setupAES() {
+            aes = new AES256(key);
+        }
+        setupAES();
+
+        async function encryptFile() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) return alert("Select a file first");
+            
+            const file = fileInput.files[0];
+            encryptedData = await aes.encryptFile(file);
+            
+            const blob = new Blob([encryptedData]);
+            const url = URL.createObjectURL(blob);
+            
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = url;
+            downloadLink.download = 'encrypted_file';
+            downloadLink.style.display = 'block';
+            downloadLink.innerText = 'Download Encrypted File';
+        }
+
+        async function decryptFile() {
+            if (!encryptedData) return alert("Encrypt a file first");
+            
+            const decryptedFile = await aes.decryptFile(encryptedData);
+            
+            const url = URL.createObjectURL(decryptedFile);
+            
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = url;
+            downloadLink.download = decryptedFile.name;
+            downloadLink.style.display = 'block';
+            downloadLink.innerText = 'Download Decrypted File';
+        }
+    </script>
+</body>
+</html>
