@@ -6,14 +6,19 @@
     <title>File Encryption & Decryption</title>
     <link rel="stylesheet" href="style.css">
     <script type="module" defer src="script.js"></script>
+    <script>
+        // Function to change background color to green
+        function changeBackgroundToBlue() {
+            document.body.style.background = '#54C392'; // Blue color
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>File Encryption & Decryption</h1>
         <input type="file" id="fileInput" class="file-input"/>
         <br>
-        <button class="action-btn" onclick="encryptFile()">Encrypt</button>
-        <button class="action-btn" onclick="decryptFile()">Decrypt</button>
+        <button class="action-btn" onclick="encryptFile(); changeBackgroundToBlue()">Encrypt</button>        <button class="action-btn" onclick="decryptFile()">Decrypt</button>
         <br>
         <a id="downloadLink" class="download-link" style="display:none;">Download File</a>
         <br>
