@@ -1,13 +1,15 @@
 export class AES256 {
-  constructor(key) {
+  private key: ArrayBuffer;
+
+  constructor(key: ArrayBuffer) {
       this.key = key;
   }
 
-  async encryptFile(file) {
-      const iv = crypto.getRandomValues(new Uint8Array(16));
-      const algorithm = { name: "AES-CBC", iv };
+  async encryptFile(file: Blob): Promise<Blob> {
+      const iv: Uint8Array = crypto.getRandomValues(new Uint8Array(16));
+      const algorithm: AesCbcParams = { name: "AES-CBC", iv };
 
-      const cryptoKey = await crypto.subtle.importKey(
+      const cryptoKey: CryptoKey = await crypto.subtle.importKey(
           "raw",
           this.key,
           algorithm,
@@ -15,21 +17,21 @@ export class AES256 {
           ["encrypt"]
       );
 
-      const fileData = await file.arrayBuffer();
-      const encryptedData = await crypto.subtle.encrypt(algorithm, cryptoKey, fileData);
+      const fileData: ArrayBuffer = await file.arrayBuffer();
+      const encryptedData: ArrayBuffer = await crypto.subtle.encrypt(algorithm, cryptoKey, fileData);
 
-      const encryptedBlob = new Blob([iv, new Uint8Array(encryptedData)]);
+      const encryptedBlob: Blob = new Blob([iv, new Uint8Array(encryptedData)]);
       return encryptedBlob;
   }
 
-  async decryptFile(encryptedBlob) {
-      const data = await encryptedBlob.arrayBuffer();
-      const iv = new Uint8Array(data.slice(0, 16));
-      const encryptedData = data.slice(16);
+  async decryptFile(encryptedBlob: Blob): Promise<Blob | null> {
+      const data: ArrayBuffer = await encryptedBlob.arrayBuffer();
+      const iv: Uint8Array = new Uint8Array(data.slice(0, 16));
+      const encryptedData: ArrayBuffer = data.slice(16);
 
-      const algorithm = { name: "AES-CBC", iv };
+      const algorithm: AesCbcParams = { name: "AES-CBC", iv };
 
-      const cryptoKey = await crypto.subtle.importKey(
+      const cryptoKey: CryptoKey = await crypto.subtle.importKey(
           "raw",
           this.key,
           algorithm,
@@ -38,7 +40,7 @@ export class AES256 {
       );
 
       try {
-          const decryptedData = await crypto.subtle.decrypt(algorithm, cryptoKey, encryptedData);
+          const decryptedData: ArrayBuffer = await crypto.subtle.decrypt(algorithm, cryptoKey, encryptedData);
           return new Blob([decryptedData]);
       } catch (error) {
           alert("Decryption failed! Invalid key.");
