@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC and AES Encryption Demo</title>
+    <link rel="stylesheet" href="ecc_style.css">
+    <script type="module">
+        import { AES256 } from './aes.js';
+
+        let aesInstance;
+
+        // Generate a random AES key and initialize AES256 instance
+        async function initializeAES() {
+            const aesKey = crypto.getRandomValues(new Uint8Array(32)); // 256-bit key
+            aesInstance = new AES256(aesKey);
+            document.getElementById("aesKey").value = btoa(String.fromCharCode(...aesKey));
+        }
+
+        // Modified encryptAESKey function to fetch AES key from AES256 instance
+        async function encryptAESKey() {
+            if (!aesInstance) return alert("AES instance not initialized!");
+
+            const publicKeyBase64 = document.getElementById("eccPublicKey").value;
+            if (!publicKeyBase64) return alert("Enter a public key!");
+
+            const privateKeyBase64 = localStorage.getItem("eccPrivateKey");
+            if (!privateKeyBase64) return alert("No private key found! Generate keys first.");
+
+            const sharedSecret = await deriveSharedSecret(privateKeyBase64, publicKeyBase64);
+
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const encryptedData = await crypto.subtle.encrypt(
+                { name: "AES-GCM", iv: iv },
+                sharedSecret,
+                aesInstance.key
+            );
+
+            const encryptedBase64 = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
+            document.getElementById("encryptedAES").value = btoa(String.fromCharCode(...iv)) + ":" + encryptedBase64;
+        }
+
+        // Decrypt AES Key
+        async function decryptAESKey() {
+            const encryptedAESInput = document.getElementById("encryptedAESInput").value;
+            if (!encryptedAESInput) return alert("Enter an encrypted AES key!");
+
+            const privateKeyBase64 = document.getElementById("eccPrivateKey").value;
+            if (!privateKeyBase64) return alert("Enter a private key!");
+
+            const publicKeyBase64 = localStorage.getItem("eccPublicKey");
+            if (!publicKeyBase64) return alert("No public key found! Generate keys first.");
+
+            const [ivBase64, encryptedBase64] = encryptedAESInput.split(":");
+            const iv = new Uint8Array(atob(ivBase64).split("").map(c => c.charCodeAt(0)));
+            const encryptedData = new Uint8Array(atob(encryptedBase64).split("").map(c => c.charCodeAt(0)));
+
+            const sharedSecret = await deriveSharedSecret(privateKeyBase64, publicKeyBase64);
+
+            try {
+                const decryptedData = await crypto.subtle.decrypt(
+                    { name: "AES-GCM", iv: iv },
+                    sharedSecret,
+                    encryptedData
+                );
+
+                document.getElementById("decryptedAES").value = btoa(String.fromCharCode(...new Uint8Array(decryptedData)));
+            } catch (error) {
+                alert("Decryption failed! Invalid key.");
+            }
+        }
+
+        // Attach functions to the global scope
+        window.initializeAES = initializeAES;
+        window.encryptAESKey = encryptAESKey;
+        window.decryptAESKey = decryptAESKey;
+    </script>
+</head>
+<body onload="initializeAES()">
+
+    <div class="container">
+        <h2>ECC and AES Encryption</h2>
+
+        <!-- Generate ECC Keys -->
+        <button onclick="generateECCKeys()">Generate ECC Keys</button>
+
+        <!-- Encryption Section -->
+        <h3>Encrypt AES Key</h3>
+        <label for="aesKey">Generated AES Key:</label>
+        <input type="text" id="aesKey" readonly>
+
+        <label for="eccPublicKey">Enter Public Key:</label>
+        <input type="text" id="eccPublicKey" placeholder="Enter Public Key">
+
+        <button onclick="encryptAESKey()">Encrypt AES Key</button>
+
+        <label for="encryptedAES">Encrypted AES Key:</label>
+        <input type="text" id="encryptedAES" readonly>
+
+        <!-- Decryption Section -->
+        <h3>Decrypt AES Key</h3>
+        <label for="encryptedAESInput">Enter Encrypted AES Key:</label>
+        <input type="text" id="encryptedAESInput" placeholder="Enter Encrypted AES Key">
+
+        <label for="eccPrivateKey">Enter Private Key:</label>
+        <input type="text" id="eccPrivateKey" placeholder="Enter Private Key">
+
+        <button onclick="decryptAESKey()">Decrypt AES Key</button>
+
+        <label for="decryptedAES">Decrypted AES Key:</label>
+        <input type="text" id="decryptedAES" readonly>
+    </div>
+
+    <script src="ecc.js"></script>
+</body>
+</html>
