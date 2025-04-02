@@ -16,18 +16,65 @@
 <body>
     <div class="container">
         <h1>File Encryption & Decryption</h1>
-        <input type="file" id="fileInput" class="file-input"/>
+        
+        <!-- File Input for Encryption and Decryption -->
+        <input type="file" id="fileInput" class="file-input" />
+
         <br>
-        <button class="action-btn" onclick="encryptFile(); changeBackgroundToBlue()">Encrypt</button>        <button class="action-btn" onclick="decryptFile()">Decrypt</button>
+
+        <!-- Encrypt and Decrypt Buttons -->
+        <button class="action-btn" onclick="encryptFile(); changeBackgroundToBlue()">Encrypt</button>        
+        <button class="action-btn" onclick="decryptFile()">Decrypt</button>
+
         <br>
+        
+        <!-- Download Link for Encrypted/Decrypted File -->
         <a id="downloadLink" class="download-link" style="display:none;">Download File</a>
+        
         <br>
+        
+        <!-- AES Key Section for Encryption and Decryption -->
         <div class="key-section">
-            <input type="text" id="aesKey" readonly class="key-input">
+            <input type="text" id="aesKey" readonly class="key-input" placeholder="AES Encryption Key" />
             <button class="copy-btn" onclick="copyKey()">Copy Key</button>
         </div>
+        
         <br>
-        <input type="text" id="decryptKey" placeholder="Enter AES Key for Decryption" class="decrypt-input">
+        
+        <!-- Decrypt Key Input -->
+        <input type="text" id="decryptKey" placeholder="Enter AES Key for Decryption" class="decrypt-input" />
     </div>
+    
+    <!-- P2P File Sharing Section -->
+    <div>
+        <h3>P2P File Sharing</h3>
+        
+        <!-- Start Sharing Button -->
+        <button onclick="createOffer()">Start Sharing</button>
+        
+        <!-- File Input and Recipient Dropdown -->
+        <input type="file" id="fileInput2" />
+        <select id="recipientSelect" class="recipient-select">
+            <option value="" disabled selected>Select Recipient</option>
+        </select>
+        
+        <!-- Send File Button -->
+        <button onclick="sendFileToRecipient()">Send File</button>
+    </div>
+    
+    <!-- Progress for Sender -->
+    <div>
+        <h3>Sender Progress</h3>
+        <progress id="senderProgressBar" value="0" max="100"></progress>
+    </div>
+    
+    <!-- Progress for Receiver -->
+    <div>
+        <h3>Receiver Progress</h3>
+        <progress id="receiverProgressBar" value="0" max="100"></progress>
+        <a id="receiverDownloadLink" style="display: none;">Download Received File</a>
+    </div>
+    
+    <script src="p2p_file_transfer.js"></script>
 </body>
 </html>

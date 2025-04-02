@@ -158,7 +158,18 @@
         <button onclick="decryptAESKey()">Decrypt AES Key</button>
         <label for="decryptedAES">Decrypted AES Key:</label>
         <input type="text" id="decryptedAES" readonly>
+
+        <div>
+            <h3>Sender Progress</h3>
+            <progress id="senderProgressBar" value="0" max="100"></progress>
+        </div>
+        <div>
+            <h3>Receiver Progress</h3>
+            <progress id="receiverProgressBar" value="0" max="100"></progress>
+            <a id="receiverDownloadLink" style="display: none;">Download Received File</a>
+        </div>
     </div>
 
 </body>
+<script src="ecc.js"></script>
 </html>
