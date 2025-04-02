@@ -75,7 +75,7 @@ function connectToSignalingServer() {
             // Handle offer, answer, and ICE candidates
             if (message.offer && message.target === peerId) {
                 console.log('Received offer:', message.offer);
-                handleOffer(message.offer, message.sender);
+                handleOffer(message.offer, message.target);
             }
 
             if (message.answer && message.target === peerId) {
