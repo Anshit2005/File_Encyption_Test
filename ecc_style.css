@@ -1,72 +1,132 @@
-/* General Styling */
+/* Make the body responsive and center content */
 body {
-    background: linear-gradient(135deg, #E3F7FF, #BBE4F9);
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif;
     margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+    overflow-y: auto;
 }
 
-/* Main Container */
+
+/* Container to center the content */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.3);
-    padding: 40px;
-    border-radius: 20px;
-    width: 500px; /* Increased width */
-    backdrop-filter: blur(12px);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Headings */
-h2, h3 {
-    color: #0D47A1;
-    text-transform: uppercase;
+h2, h3, h4 {
+    margin-top: 1.5em;
 }
 
-/* Input Fields */
-input {
-    width: 90%; /* Increased width */
-    padding: 16px; /* More padding */
-    font-size: 18px; /* Larger text */
-    border: 2px solid #90CAF9;
-    border-radius: 10px;
-    background: #E3F7FF;
-    color: #0D47A1;
-    text-align: center;
-    transition: 0.3s;
-    margin-bottom: 15px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
 
-input:hover, input:focus {
-    border-color: #64B5F6;
-    background: #D6F0FF;
-    outline: none;
-}
-
-/* Buttons */
 button {
-    background: linear-gradient(45deg, #64B5F6, #90CAF9);
+    padding: 10px 20px;
+    margin: 8px 0;
+    background-color: #007bff;
     color: white;
     border: none;
-    padding: 18px; /* Larger button */
-    width: 92%; /* Matches input width */
-    font-size: 18px;
-    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-    margin-top: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background: linear-gradient(45deg, #90CAF9, #64B5F6);
-    transform: scale(1.05);
+    background-color: #0056b3;
+}
+
+.download-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Peer Selection Section */
+select {
+    padding: 10px;
+    font-size: 1em;
+}
+
+/* Spacer for sections */
+h4 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    input[type="file"], input[type="text"], select, button {
+        font-size: 0.9em;
+    }
+}
+
+/* Style for the Peer ID section */
+.peer-id-container {
+    display: flex;
+    align-items: center;  /* Aligns the text and input field vertically */
+    gap: 10px; /* Adds space between the label and the input */
+    margin: 10px 0; /* Adds space around the container */
+}
+
+#peerSelect {
+    width: 100%; /* Makes the input field take up all available space */
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+p {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.sendbtn{
+    display: none;
+
+    &.connected {
+        display: block;
+    }
+}
+
+.generatedkeys{
+    display: none;
+
+    &.generated{
+        display: block;
+    }
 }

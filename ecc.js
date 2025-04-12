@@ -1,3 +1,11 @@
+function copyKey(id) {
+    const field = document.getElementById(id);
+    field.select();
+    field.setSelectionRange(0, 99999); // For mobile
+    navigator.clipboard.writeText(field.value);
+    alert("Key copied!");
+}
+
 async function generateECCKeys() {
     const keyPair = await window.crypto.subtle.generateKey(
         {
@@ -16,6 +24,10 @@ async function generateECCKeys() {
 
     localStorage.setItem("eccPublicKey", btoa(String.fromCharCode(...new Uint8Array(publicKey))));
     localStorage.setItem("eccPrivateKey", btoa(String.fromCharCode(...new Uint8Array(privateKey))));
+
+    document.getElementById('publicKeyField').value = btoa(String.fromCharCode(...new Uint8Array(publicKey)));
+    document.getElementById('privateKeyField').value = btoa(String.fromCharCode(...new Uint8Array(privateKey)));
+    document.getElementsByClassName('generatedkeys')[0].style.display = "block";
 }
 
 async function deriveSharedSecret(privateKeyBase64, publicKeyBase64) {
