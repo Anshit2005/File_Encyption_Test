@@ -46,7 +46,7 @@
         <button onclick="generateECCKeys()">Generate ECC Keys</button>
 
         <div class="generatedkeys" style="display: none;">
-            
+
             <h3>Public Key (Base64):</h3>
             <div class="key-block">
                 <input type="text" id="publicKeyField" readonly />
@@ -80,7 +80,29 @@
         <label for="decryptedAES">Decrypted AES Key:</label>
         <input type="text" id="decryptedAES" readonly>
 
-      
+        <h3>Peer-to-Peer File Transfer</h3>
+
+        <p>Share your Peer ID with a friend to connect.</p>
+        <button onclick="connectToSignalingServer()">Connect to Signaling Server</button>
+
+        <!-- Input for Friend's Peer ID -->
+        <h4>Enter Friend's Peer ID to Connect:</h4>
+        <input type="text" id="peerIdInput" placeholder="Enter Peer ID">
+        <button onclick="requestPeerConnection()">Connect</button>
+
+        <button class="sendbtn" onclick="sendEncryptedFile()">Send Encrypted File</button>
+
+        <div>
+            <h4>Transfer Progress</h4>
+            <label>Sender Progress</label>
+            <progress id="senderProgressBar" value="0" max="100"></progress><br>
+
+            <label>Receiver Progress</label>
+            <progress id="receiverProgressBar" value="0" max="100"></progress><br>
+
+            <a id="receiverDownloadLink" style="display: none;">Download Received File</a>
+        </div>
+    </div>
 
 </body>
 <script src="ecc.js"></script>
