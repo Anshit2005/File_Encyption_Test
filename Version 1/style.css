@@ -1,0 +1,185 @@
+/* General Styling */
+body {
+    background: linear-gradient(135deg, #E3F7FF, #BBE4F9); /* Softer Light Blue Gradient */
+    color: #0D47A1; /* Deep Blue for readability */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.25); /* Slight Transparency */
+    padding: 40px;
+    border-radius: 20px;
+    width: 450px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(12px); /* Enhanced Blurred Glass Effect */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Neon Border Effect */
+.container::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #64B5F6, #90CAF9);
+    z-index: -1;
+    filter: blur(20px);
+}
+
+/* Heading */
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #0D47A1; /* Deep Blue for Trust */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* File Input Styling */
+.file-input-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.file-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: 2px solid #90CAF9;
+    border-radius: 10px;
+    background: #E3F7FF;
+    color: #0D47A1;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.file-input:hover {
+    border-color: #64B5F6;
+    background: #D6F0FF;
+}
+
+/* Buttons */
+.action-btn {
+    background: linear-gradient(45deg, #64B5F6, #90CAF9);
+    color: #0D47A1;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 15px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover {
+    background: linear-gradient(45deg, #90CAF9, #64B5F6);
+    transform: scale(1.05);
+}
+
+/* Download Link */
+.download-link {
+    display: block;
+    color: #0D47A1;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.download-link {
+    display: block;
+    text-align: center;
+    width: 100%;  /* Ensures it aligns inside container */
+}
+.download-link:hover {
+    text-decoration: underline;
+    color: #1565C0;
+}
+
+/* Key Section */
+.key-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Key Input */
+.key-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    border: 2px solid #90CAF9;
+    border-radius: 10px;
+    background: #E3F7FF;
+    color: #0D47A1;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.key-input:hover {
+    border-color: #64B5F6;
+    background: #D6F0FF;
+}
+
+/* Copy Button */
+.copy-btn {
+    background: #90CAF9;
+    color: #0D47A1;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.copy-btn:hover {
+    background: #64B5F6;
+}
+
+/* Decryption Input */
+.decrypt-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    border: 2px solid #90CAF9;
+    border-radius: 10px;
+    background: #E3F7FF;
+    color: #0D47A1;
+    text-align: center;
+    margin-top: 15px;
+    transition: 0.3s;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.decrypt-input:hover {
+    border-color: #64B5F6;
+    background: #D6F0FF;
+}

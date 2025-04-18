@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryption & Decryption</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" defer src="script.js"></script>
+    <script>
+        // Function to change background color to green
+        function changeBackgroundToBlue() {
+            document.body.style.background = '#A1EEBD';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>File Encryption & Decryption</h1>
+        <input type="file" id="fileInput" class="file-input"/>
+        <br>
+        <button class="action-btn" onclick="encryptFile(); changeBackgroundToBlue()">Encrypt</button>        <button class="action-btn" onclick="decryptFile()">Decrypt</button>
+        <br>
+        <a id="downloadLink" class="download-link" style="display:none;">Download File</a>
+        <br>
+        <div class="key-section">
+            <input type="text" id="aesKey" readonly class="key-input">
+            <button class="copy-btn" onclick="copyKey()">Copy Key</button>
+        </div>
+        <br>
+        <input type="text" id="decryptKey" placeholder="Enter AES Key for Decryption" class="decrypt-input">
+    </div>
+</body>
+</html>

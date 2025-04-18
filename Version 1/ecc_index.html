@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC Encryption Demo</title>
+    <link rel="stylesheet" href="ecc_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>ECC Encryption for AES Key</h2>
+
+        <!-- Generate ECC Keys -->
+        <button onclick="generateECCKeys()">Generate ECC Keys</button>
+
+        <!-- Encryption Section -->
+        <h3>Encrypt AES Key</h3>
+        <label for="aesKey">Enter AES Key:</label>
+        <input type="text" id="aesKey" placeholder="Enter AES Key">
+
+        <label for="eccPublicKey">Enter Public Key:</label>
+        <input type="text" id="eccPublicKey" placeholder="Enter Public Key">
+
+        <button onclick="encryptAESKey()">Encrypt AES Key</button>
+
+        <label for="encryptedAES">Encrypted AES Key:</label>
+        <input type="text" id="encryptedAES" readonly>
+
+        <!-- Decryption Section -->
+        <h3>Decrypt AES Key</h3>
+        <label for="encryptedAESInput">Enter Encrypted AES Key:</label>
+        <input type="text" id="encryptedAESInput" placeholder="Enter Encrypted AES Key">
+
+        <label for="eccPrivateKey">Enter Private Key:</label>
+        <input type="text" id="eccPrivateKey" placeholder="Enter Private Key">
+
+        <button onclick="decryptAESKey()">Decrypt AES Key</button>
+
+        <label for="decryptedAES">Decrypted AES Key:</label>
+        <input type="text" id="decryptedAES" readonly>
+    </div>
+
+    <script src="ecc.js"></script>
+</body>
+</html>
